@@ -1,2 +1,9 @@
 
 1. My name is Daniel Fonseca and my student email is daniel.fonseca@maine.edu
+2. I have no experience programming with c#, but from what I have seen already during the last lecture, c# is very similar to Java and I feel much more prepared to program using c# now.
+   I do have experience using Git.
+3. I'm very much interested in UI design and how websites are developed and maintained. 
+4. I wish to become a UI/UX designer in the future. 
+5. I'm hoping that by the end of this class I will have an idea of how websites are developed, how databases are maintained, and hopefully some new programming skills.  
+6. I like working and studying in a quiet place. I find videos that explain or teach new material to be very helpful, but I also find books and articles to be helpful as well. 
+7. I'm fluent in Spanish. 
