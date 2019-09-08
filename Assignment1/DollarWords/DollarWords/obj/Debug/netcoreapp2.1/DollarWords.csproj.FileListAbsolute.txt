@@ -1,0 +1,11 @@
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\bin\Debug\netcoreapp2.1\DollarWords.deps.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\bin\Debug\netcoreapp2.1\DollarWords.runtimeconfig.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\bin\Debug\netcoreapp2.1\DollarWords.runtimeconfig.dev.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\bin\Debug\netcoreapp2.1\DollarWords.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\bin\Debug\netcoreapp2.1\DollarWords.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment1\DollarWords\DollarWords\obj\Debug\netcoreapp2.1\DollarWords.pdb
