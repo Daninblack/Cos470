@@ -115,7 +115,7 @@ namespace DollarWords
         {
             double percentage;
 
-            Console.WriteLine("Some information:\n");
+            Console.WriteLine("Displaying information of the results:\n");
             //Prints the percentage of dollar words found in the text file
             if (totalDollarWords == 0)
             {
@@ -129,8 +129,8 @@ namespace DollarWords
             }
 
             //Prints the shortest and longest dollar words found in the text file
-            Console.WriteLine("Shortest dollar word is " + shortest);
-            Console.WriteLine("Longest dollar word is " + longest);
+            Console.WriteLine("The shortest dollar word is " + shortest);
+            Console.WriteLine("The longest dollar word is " + longest);
 
             //Prints the most expensive word found in the text file
             Console.WriteLine("The most expensive word is " + mostExpensiveWord);
@@ -138,7 +138,7 @@ namespace DollarWords
 
         public static void DisplayInformation(long time)
         {
-            Console.WriteLine("It took " + time + " milliseconds to find all the dollar words.");
+            Console.WriteLine("It took " + time + " milliseconds to find all the dollar words");
         }
 
     }
