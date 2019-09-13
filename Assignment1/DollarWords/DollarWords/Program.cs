@@ -115,7 +115,7 @@ namespace DollarWords
         {
 
             Console.WriteLine("Displaying information of the results:\n");
-            //Prints the percentage of dollar words found in the text file
+
             if (totalDollarWords == 0)
             {
                 Console.WriteLine("No dollar words were found.");
