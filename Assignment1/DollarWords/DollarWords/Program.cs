@@ -113,7 +113,6 @@ namespace DollarWords
 
         public static void DisplayInformation(double totalDollarWords, double totalWords, string shortest, string longest, string mostExpensiveWord)
         {
-            double percentage;
 
             Console.WriteLine("Displaying information of the results:\n");
             //Prints the percentage of dollar words found in the text file
@@ -123,9 +122,7 @@ namespace DollarWords
             }
             else
             {
-                percentage = Math.Round((totalDollarWords / totalWords) * 100, 2);
-
-                Console.WriteLine(percentage + "% of the words are dollar words.");
+                Console.WriteLine(totalDollarWords + " out of " + totalWords + " are dollar words");
             }
 
             //Prints the shortest and longest dollar words found in the text file
