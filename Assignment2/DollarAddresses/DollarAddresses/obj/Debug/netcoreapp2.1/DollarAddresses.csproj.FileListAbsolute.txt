@@ -1,0 +1,11 @@
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\bin\Debug\netcoreapp2.1\DollarAddresses.deps.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\bin\Debug\netcoreapp2.1\DollarAddresses.runtimeconfig.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\bin\Debug\netcoreapp2.1\DollarAddresses.runtimeconfig.dev.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\bin\Debug\netcoreapp2.1\DollarAddresses.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\bin\Debug\netcoreapp2.1\DollarAddresses.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment2\DollarAddresses\DollarAddresses\obj\Debug\netcoreapp2.1\DollarAddresses.pdb
