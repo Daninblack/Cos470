@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 
@@ -22,7 +23,7 @@ namespace DollarAddresses
         public static string FetchAddresses()
         {
             var json = "";
-            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27Portland%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=address_number&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=0&resultRecordCount=&f=pjson";            
+            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27South+Portland%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=address_number&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=0&resultRecordCount=&f=pjson";
             using (WebClient wc = new WebClient())
             {
                 json = wc.DownloadString(url);
@@ -35,7 +36,8 @@ namespace DollarAddresses
             try
             {
                 var jAddress = JsonConvert.DeserializeObject<Object>(json);
-                PrintDeserializedJSON(jAddress);
+                //DisplayDeserializedJSON(jAddress);
+                FilterDollarAddresses(jAddress);
             }
             catch (Exception e)
             {
@@ -44,7 +46,7 @@ namespace DollarAddresses
 
         }
 
-        public static void PrintDeserializedJSON(Object jAddress)
+        public static void DisplayDeserializedJSON(Object jAddress)
         {
             Console.WriteLine("displayFieldName : " + jAddress.displayFieldName);
 
@@ -75,6 +77,73 @@ namespace DollarAddresses
 
             Console.WriteLine("\nexceededTransferLimit : " + jAddress.exceededTransferLimit);
         }
+
+        public static int LetterValue(char c)
+        {
+            //Converts char to lower case
+            char letter = char.ToLower(c);
+
+            //Gets the character's ASCII value
+            int number = (int)letter;
+
+            //Only returns values for characters A-Z
+            if (number >= 97 && number <= 122)
+            {
+                return number - 96;
+            }
+            return 0;
+        }
+
+        public static int getAddressValue(string word)
+        {
+            int value = 0;
+            foreach (char c in word)
+            {
+                //Adds the value of each character
+                value += LetterValue(c);
+            }
+            return value;
+        }
+
+        public static Boolean IsItDollarAddress(int addressValue, int addressNumber)
+        {
+            if(addressValue == addressNumber) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static void FilterDollarAddresses(Object jAddress)
+        {
+            List<Object.Features> dollarAddresses = new List<Object.Features>();
+            int addressValue;
+            int addressNumber;
+
+            foreach(var address in jAddress.features)
+            {
+                addressValue = getAddressValue(address.attributes.STREETNAME);
+                addressNumber = address.attributes.ADDRESS_NUMBER;
+                if(IsItDollarAddress(addressValue, addressNumber))
+                {
+                    dollarAddresses.Add(address);
+                }
+            }
+
+            DisplayDollarAddresses(dollarAddresses);
+        }
+
+        public static void DisplayDollarAddresses(List<Object.Features> addresses)
+        {
+            foreach(var address in addresses)
+            {
+                Console.WriteLine("Address number: " + address.attributes.ADDRESS_NUMBER + " Address name: " + address.attributes.STREETNAME);
+            }
+        }
+
     }
 
 
