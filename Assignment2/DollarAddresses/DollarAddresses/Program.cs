@@ -23,7 +23,8 @@ namespace DollarAddresses
         public static string FetchAddresses()
         {
             var json = "";
-            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27South+Portland%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=address_number&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=0&resultRecordCount=&f=pjson";
+            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27South+Portland%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY%2CUNIT&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=address_number&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=0&resultRecordCount=&f=pjson";
+
             using (WebClient wc = new WebClient())
             {
                 json = wc.DownloadString(url);
@@ -36,14 +37,12 @@ namespace DollarAddresses
             try
             {
                 var jAddress = JsonConvert.DeserializeObject<Object>(json);
-                //DisplayDeserializedJSON(jAddress);
                 FilterDollarAddresses(jAddress);
             }
             catch (Exception e)
             {
                 Console.WriteLine("We had a problem: " + e.Message.ToString());
             }
-
         }
 
         public static void DisplayDeserializedJSON(Object jAddress)
@@ -94,7 +93,7 @@ namespace DollarAddresses
             return 0;
         }
 
-        public static int getAddressValue(string word)
+        public static int getWordValue(string word)
         {
             int value = 0;
             foreach (char c in word)
@@ -105,9 +104,9 @@ namespace DollarAddresses
             return value;
         }
 
-        public static Boolean IsItDollarAddress(int addressValue, int addressNumber)
+        public static Boolean IsItDollarAddress(int streetNameValue, int streetSuffixValue,  int addressNumber)
         {
-            if(addressValue == addressNumber) 
+            if((streetNameValue + streetSuffixValue) == addressNumber) 
             {
                 return true;
             }
@@ -120,14 +119,17 @@ namespace DollarAddresses
         public static void FilterDollarAddresses(Object jAddress)
         {
             List<Object.Features> dollarAddresses = new List<Object.Features>();
-            int addressValue;
+            int streetNameValue;
+            int streetSuffixValue;
             int addressNumber;
 
             foreach(var address in jAddress.features)
             {
-                addressValue = getAddressValue(address.attributes.STREETNAME);
+                streetNameValue = getWordValue(address.attributes.STREETNAME);
+                streetSuffixValue = getWordValue(address.attributes.SUFFIX);
                 addressNumber = address.attributes.ADDRESS_NUMBER;
-                if(IsItDollarAddress(addressValue, addressNumber))
+
+                if(IsItDollarAddress(streetNameValue, streetSuffixValue, addressNumber))
                 {
                     dollarAddresses.Add(address);
                 }
@@ -138,10 +140,23 @@ namespace DollarAddresses
 
         public static void DisplayDollarAddresses(List<Object.Features> addresses)
         {
-            foreach(var address in addresses)
+            Console.WriteLine("\"Dollar addresses\" are street addresses where the house number is the \"cost\" of the street. \"Cost\" " +
+                "of a street is the sum of the letters in the streetName and streetSuffix. The streetApartmentUnit does not count as part of the " +
+                "cost a street.\n");
+
+            if(addresses.Count == 0)
             {
-                Console.WriteLine("Address number: " + address.attributes.ADDRESS_NUMBER + " Address name: " + address.attributes.STREETNAME);
+                Console.WriteLine("There were no dollar addresses found");
             }
+            else
+            {
+                Console.WriteLine("Dollar addresses from " + addresses[0].attributes.MUNICIPALITY + ":\n");
+                foreach (var address in addresses)
+                {
+                    Console.WriteLine(address.attributes.ADDRESS_NUMBER + " " + address.attributes.STREETNAME + " " + address.attributes.SUFFIX +
+                                       ". " + address.attributes.UNIT);
+                }
+            }           
         }
 
     }
@@ -162,6 +177,7 @@ namespace DollarAddresses
             public string STREETNAME { get; set; }
             public string SUFFIX { get; set; }
             public string MUNICIPALITY { get; set; }
+            public string UNIT { get; set; }
         }
 
         public class Address
@@ -170,6 +186,7 @@ namespace DollarAddresses
             public string STREETNAME { get; set; }
             public string SUFFIX { get; set; }
             public string MUNICIPALITY { get; set; }
+            public string UNIT { get; set; }
         }
 
         public class FieldInfo
