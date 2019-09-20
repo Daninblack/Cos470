@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Configuration;
 using System.Net;
 
 
@@ -22,8 +22,16 @@ namespace DollarAddresses
 
         public static string FetchAddresses()
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, true)
+                .Build();
+
             var json = "";
-            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27South+Portland%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY%2CUNIT&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=address_number&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=0&resultRecordCount=&f=pjson";
+            var city = config["city"];
+            string resultCount = config["resultCount"];
+
+            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27" 
+                         + city + "%27&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY&resultRecordCount="+ resultCount + "&f=pjson";
 
             using (WebClient wc = new WebClient())
             {
@@ -140,10 +148,6 @@ namespace DollarAddresses
 
         public static void DisplayDollarAddresses(List<Object.Features> addresses)
         {
-            Console.WriteLine("\"Dollar addresses\" are street addresses where the house number is the \"cost\" of the street. \"Cost\" " +
-                "of a street is the sum of the letters in the streetName and streetSuffix. The streetApartmentUnit does not count as part of the " +
-                "cost a street.\n");
-
             if(addresses.Count == 0)
             {
                 Console.WriteLine("There were no dollar addresses found");
@@ -153,8 +157,7 @@ namespace DollarAddresses
                 Console.WriteLine("Dollar addresses from " + addresses[0].attributes.MUNICIPALITY + ":\n");
                 foreach (var address in addresses)
                 {
-                    Console.WriteLine(address.attributes.ADDRESS_NUMBER + " " + address.attributes.STREETNAME + " " + address.attributes.SUFFIX +
-                                       ". " + address.attributes.UNIT);
+                    Console.WriteLine(address.attributes.ADDRESS_NUMBER + " " + address.attributes.STREETNAME + " " + address.attributes.SUFFIX);
                 }
             }           
         }
@@ -177,7 +180,6 @@ namespace DollarAddresses
             public string STREETNAME { get; set; }
             public string SUFFIX { get; set; }
             public string MUNICIPALITY { get; set; }
-            public string UNIT { get; set; }
         }
 
         public class Address
@@ -186,7 +188,6 @@ namespace DollarAddresses
             public string STREETNAME { get; set; }
             public string SUFFIX { get; set; }
             public string MUNICIPALITY { get; set; }
-            public string UNIT { get; set; }
         }
 
         public class FieldInfo
