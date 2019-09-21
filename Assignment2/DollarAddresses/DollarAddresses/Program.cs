@@ -27,11 +27,13 @@ namespace DollarAddresses
                 .Build();
 
             var json = "";
-            var city = config["city"];
-            string resultCount = config["resultCount"];
+            var municipality = config["municipality"];
+            var outFields = config["outFields"];
+            var resultCount = config["resultCount"];
+            var f = config["f"];
 
             string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27" 
-                         + city + "%27&outFields=ADDRESS_NUMBER%2CSTREETNAME%2CSUFFIX%2CMUNICIPALITY&resultRecordCount="+ resultCount + "&f=pjson";
+                         + municipality + "%27&outFields=" + outFields + "&resultRecordCount="+ resultCount + "&f=" + f;
 
             using (WebClient wc = new WebClient())
             {
