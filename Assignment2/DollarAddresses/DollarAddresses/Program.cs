@@ -7,7 +7,7 @@ using System.Net;
 
 namespace DollarAddresses
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -47,7 +47,8 @@ namespace DollarAddresses
             try
             {
                 var jAddress = JsonConvert.DeserializeObject<Object>(json);
-                FilterDollarAddresses(jAddress);
+                var dollarAddresses = FilterDollarAddresses(jAddress);
+                DisplayDollarAddresses(dollarAddresses);
             }
             catch (Exception e)
             {
@@ -57,23 +58,6 @@ namespace DollarAddresses
 
         public static void DisplayDeserializedJSON(Object jAddress)
         {
-            Console.WriteLine("displayFieldName : " + jAddress.displayFieldName);
-
-            Console.WriteLine("\nFieldAliases: ");
-            Console.WriteLine("ADDRESS_NUMBER : " + jAddress.fieldAliases.ADDRESS_NUMBER);
-            Console.WriteLine("STREETNAME : " + jAddress.fieldAliases.STREETNAME);
-            Console.WriteLine("SUFFIX : " + jAddress.fieldAliases.SUFFIX);
-            Console.WriteLine("MUNICIPALITY : " + jAddress.fieldAliases.MUNICIPALITY);
-
-            Console.WriteLine("\nFields: ");
-            foreach (var item in jAddress.fields)
-            {
-                Console.WriteLine(item.name);
-                Console.WriteLine(item.type);
-                Console.WriteLine(item.alias);
-                Console.WriteLine(item.length);
-            }
-
             Console.WriteLine("\nFeatures: ");
             foreach (var item in jAddress.features)
             {
@@ -83,8 +67,6 @@ namespace DollarAddresses
                 Console.WriteLine("SUFFIX : " + item.attributes.SUFFIX);
                 Console.WriteLine("MUNICIPALITY : " + item.attributes.MUNICIPALITY);
             }
-
-            Console.WriteLine("\nexceededTransferLimit : " + jAddress.exceededTransferLimit);
         }
 
         public static int LetterValue(char c)
@@ -126,7 +108,7 @@ namespace DollarAddresses
             }
         }
 
-        public static void FilterDollarAddresses(Object jAddress)
+        public static List<Object.Features> FilterDollarAddresses(Object jAddress)
         {
             List<Object.Features> dollarAddresses = new List<Object.Features>();
             int streetNameValue;
@@ -145,7 +127,7 @@ namespace DollarAddresses
                 }
             }
 
-            DisplayDollarAddresses(dollarAddresses);
+            return dollarAddresses;
         }
 
         public static void DisplayDollarAddresses(List<Object.Features> addresses)
@@ -169,20 +151,7 @@ namespace DollarAddresses
 
     public class Object
     {
-        public string displayFieldName { get; set; }
-        public Aliases fieldAliases { get; set; }
-        public List<FieldInfo> fields { get; set; }
         public List<Features> features { get; set; }
-        public bool exceededTransferLimit { get; set; }
-
-
-        public class Aliases
-        {
-            public string ADDRESS_NUMBER { get; set; }
-            public string STREETNAME { get; set; }
-            public string SUFFIX { get; set; }
-            public string MUNICIPALITY { get; set; }
-        }
 
         public class Address
         {
@@ -190,14 +159,6 @@ namespace DollarAddresses
             public string STREETNAME { get; set; }
             public string SUFFIX { get; set; }
             public string MUNICIPALITY { get; set; }
-        }
-
-        public class FieldInfo
-        {
-            public string name { get; set; }
-            public string type { get; set; }
-            public string alias { get; set; }
-            public int length { get; set; }
         }
 
         public class Features
