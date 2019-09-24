@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using DollarAddresses;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -13,14 +14,21 @@ namespace Tests
         [Test]
         public void IsItDollarAddress_ItIsDollarAddress_ReturnsTrue()
         {
-            //Arrange
-            var Address = new DollarAddresses.Object.Address { ADDRESS_NUMBER = 3, STREETNAME = "A", SUFFIX = "B" };
-            var streetNameValue = DollarAddresses.Program.getWordValue(Address.STREETNAME);
-            var streetSuffixValue = DollarAddresses.Program.getWordValue(Address.SUFFIX);
-            //Act
-            var result = DollarAddresses.Program.IsItDollarAddress(streetNameValue, streetSuffixValue, Address.ADDRESS_NUMBER);
-            //Assert
+            var Address = new Object.Address { ADDRESS_NUMBER = 3, STREETNAME = "A", SUFFIX = "B" };
+            var streetNameValue = Program.getWordValue(Address.STREETNAME);
+            var streetSuffixValue = Program.getWordValue(Address.SUFFIX);
+            var result = Program.IsItDollarAddress(streetNameValue, streetSuffixValue, Address.ADDRESS_NUMBER);
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsItDollarAddress_ItIsNotDollarAddress_ReturnsTrue()
+        {
+            var Address = new Object.Address { ADDRESS_NUMBER = 127, STREETNAME = "B", SUFFIX = "C" };
+            var streetNameValue = Program.getWordValue(Address.STREETNAME);
+            var streetSuffixValue = Program.getWordValue(Address.SUFFIX);
+            var result = Program.IsItDollarAddress(streetNameValue, streetSuffixValue, Address.ADDRESS_NUMBER);
+            Assert.IsFalse(result);
         }
 
         [TestCase("a", ExpectedResult = 1)]
@@ -34,7 +42,7 @@ namespace Tests
         [TestCase("145?.&%99.0  6", ExpectedResult = 0)]
         public int TestWordValue(string input)
         {
-            return DollarAddresses.Program.getWordValue(input);
+            return Program.getWordValue(input);
         }
     }
 }
