@@ -16,11 +16,12 @@ namespace DollarAddresses
 
         public static void Run()
         {
-            string json = FetchAddresses();
+            string address = SetParameters();
+            string json = FetchAddresses(address);
             DesirializeJSON(json);
         }
 
-        public static string FetchAddresses()
+        public static string SetParameters()
         {
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", false, true)
@@ -35,6 +36,11 @@ namespace DollarAddresses
             var address = @"https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?"
                 + parameters;
 
+            return address;
+        }
+
+        public static string FetchAddresses(string address)
+        {
             using (var client = new HttpClient())
             {
                 using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, address))
@@ -48,7 +54,6 @@ namespace DollarAddresses
                     return content;
                 }
             }
-
         }
 
         public static void DesirializeJSON(string json)
@@ -141,7 +146,6 @@ namespace DollarAddresses
                 }
             }           
         }
-
     }
 
 
@@ -160,8 +164,7 @@ namespace DollarAddresses
         public class Features
         {
             public Address attributes { get; set; }
-        }
-       
+        }      
     }
 
 }
