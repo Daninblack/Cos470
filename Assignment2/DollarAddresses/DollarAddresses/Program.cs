@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Net.Http;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
-using System.Net;
-using System.Net.Http;
+
 
 namespace DollarAddresses
 {
@@ -62,19 +62,6 @@ namespace DollarAddresses
             catch (Exception e)
             {
                 Console.WriteLine("We had a problem: " + e.Message.ToString());
-            }
-        }
-
-        public static void DisplayDeserializedJSON(Object jAddress)
-        {
-            Console.WriteLine("\nFeatures: ");
-            foreach (var item in jAddress.features)
-            {
-                Console.WriteLine("\nAttributes:");
-                Console.WriteLine("ADDRESS_NUMBER : " + item.attributes.ADDRESS_NUMBER);
-                Console.WriteLine("STREETNAME : " + item.attributes.STREETNAME);
-                Console.WriteLine("SUFFIX : " + item.attributes.SUFFIX);
-                Console.WriteLine("MUNICIPALITY : " + item.attributes.MUNICIPALITY);
             }
         }
 
