@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using System.Net;
-
+using System.Net.Http;
 
 namespace DollarAddresses
 {
@@ -26,20 +26,29 @@ namespace DollarAddresses
                 .AddJsonFile("appsettings.json", false, true)
                 .Build();
 
-            var json = "";
-            var municipality = config["municipality"];
-            var outFields = config["outFields"];
-            var resultCount = config["resultCount"];
-            var f = config["f"];
+            var parameters = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            parameters["where"] = config["where"];
+            parameters["outFields"] = config["outFields"];
+            parameters["f"] = config["f"];
+            parameters["resultCount"] = config["resultCount"];
 
-            string url = "https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?where=MUNICIPALITY%3D%27" 
-                         + municipality + "%27&outFields=" + outFields + "&resultRecordCount="+ resultCount + "&f=" + f;
+            var address = @"https://gis.maine.gov/arcgis/rest/services/Location/Maine_E911_Addresses_Roads_PSAP/MapServer/1/query?"
+                + parameters;
 
-            using (WebClient wc = new WebClient())
+            using (var client = new HttpClient())
             {
-                json = wc.DownloadString(url);
+                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, address))
+                {
+                    var response = client.SendAsync(request).Result;
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception($"{content}: {response.StatusCode}");
+                    }
+                    return content;
+                }
             }
-            return json;
+
         }
 
         public static void DesirializeJSON(string json)
