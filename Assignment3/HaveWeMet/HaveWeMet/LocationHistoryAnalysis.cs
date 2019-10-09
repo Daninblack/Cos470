@@ -31,7 +31,7 @@ namespace HaveWeMet
                 {
                     DateTime date2 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(locationHistory2.locations[j].timestampMs);
                     //Checks if the time is relatively close
-                    if (LocationHistoryHelperMethods.DateTimesCoincide(date1, date2) == true)
+                    if (LocationHistoryHelperMethods.DateTimesCoincide(date1, date2))
                     {
                         var lat1 = locationHistory1.locations[i].latitudeE7;
                         var lon1 = locationHistory1.locations[i].longitudeE7;
@@ -39,7 +39,7 @@ namespace HaveWeMet
                         var lon2 = locationHistory2.locations[j].longitudeE7;
                         var HaveWeMet = LocationHistoryHelperMethods.LocationsCoincide(lat1, lon1, lat2, lon2);
                         //Checks if the coordinates are relatively close
-                        if (HaveWeMet == true)
+                        if (HaveWeMet)
                         {
                             Console.WriteLine("We have met!\n\nLatitude: " + lat1 + "\tLongitude: " + lon1);
                             Console.WriteLine("\nDate: " + date1 + "\tUnix Time: " + locationHistory1.locations[i].timestampMs);
