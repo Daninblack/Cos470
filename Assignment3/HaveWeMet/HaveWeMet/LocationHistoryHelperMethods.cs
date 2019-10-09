@@ -100,14 +100,7 @@ namespace HaveWeMet
             var coordinate2 = new GeoCoordinate(lat2, long2);
             double distance = coordinate1.GetDistanceTo(coordinate2);
 
-            if (distance <= distanceLimit)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return distance <= distanceLimit;
         }
 
     }
