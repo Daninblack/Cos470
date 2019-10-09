@@ -22,21 +22,22 @@ namespace HaveWeMet
             return false;
         }
 
+
         public static bool HaveWeMet(LocationHistory locationHistory1, LocationHistory locationHistory2)
         {
-            for (int i = 0; i < locationHistory1.locations.Count; i++)
+            foreach(var location1 in  locationHistory1.locations)
             {
-                DateTime date1 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(locationHistory1.locations[i].timestampMs);
-                for (int j = 0; j < locationHistory2.locations.Count; j++)
+                DateTime date1 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(location1.timestampMs);
+                foreach(var location2 in locationHistory2.locations)
                 {
-                    DateTime date2 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(locationHistory2.locations[j].timestampMs);
+                    DateTime date2 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(location2.timestampMs);
                     //Checks if the time is relatively close
                     if (LocationHistoryHelperMethods.DateTimesCoincide(date1, date2))
                     {
-                        var lat1 = locationHistory1.locations[i].latitudeE7;
-                        var lon1 = locationHistory1.locations[i].longitudeE7;
-                        var lat2 = locationHistory2.locations[j].latitudeE7;
-                        var lon2 = locationHistory2.locations[j].longitudeE7;
+                        var lat1 = location1.latitudeE7;
+                        var lon1 = location1.longitudeE7;
+                        var lat2 = location2.latitudeE7;
+                        var lon2 = location2.longitudeE7;
                         var HaveWeMet = LocationHistoryHelperMethods.LocationsCoincide(lat1, lon1, lat2, lon2);
                         //Checks if the coordinates are relatively close
                         if (HaveWeMet)
@@ -51,7 +52,6 @@ namespace HaveWeMet
             Console.WriteLine("We have not met before.");
             return false;
         }
-
 
     }
 }
