@@ -90,7 +90,7 @@ namespace Tests
         }
 
         [Test]
-        public void CheckAlibi_GivenExistingDate_ReturnsTrue()
+        public void CheckAlibi_GivenExistingDate_ReturnsLocation()
         {
             DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime("1548894177190");
             var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
@@ -98,19 +98,19 @@ namespace Tests
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
 
             var result = LocationHistoryAnalysis.CheckAlibi(date, locationHistory);
-            Assert.IsTrue(result);
+            Assert.IsInstanceOf(typeof(LocationHistory.Location), result);
         }
 
         [Test]
-        public void CheckAlibi_GivenNonExistingDate_ReturnsFalse()
+        public void CheckAlibi_GivenNonExistingDate_ReturnsNull()
         {
-            DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime("1000000000000");
+            DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime("1001000100100");
             var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
             var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
 
             var result = LocationHistoryAnalysis.CheckAlibi(date, locationHistory);
-            Assert.IsFalse(result);
+            Assert.IsNull(result);
         }
 
         [Test]

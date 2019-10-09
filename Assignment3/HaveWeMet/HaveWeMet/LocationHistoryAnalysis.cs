@@ -8,7 +8,7 @@ namespace HaveWeMet
         * Checks where you were on a particular day
         * Returns first instance found
         */
-        public static bool CheckAlibi(DateTime date, LocationHistory locationHistory)
+        public static LocationHistory.Location CheckAlibi(DateTime date, LocationHistory locationHistory)
         {
             foreach (var location in locationHistory.locations)
             {
@@ -16,10 +16,10 @@ namespace HaveWeMet
                 if (DateTime.Compare(date, day) == 0)
                 {
                     Console.WriteLine("Location:\n\nLatitude: " + location.latitudeE7 + "\tLongitude: " + location.longitudeE7);
-                    return true;
+                    return location;
                 }
             }
-            return false;
+            return null;
         }
 
 
@@ -43,7 +43,7 @@ namespace HaveWeMet
                         if (HaveWeMet)
                         {
                             Console.WriteLine("We have met!\n\nLatitude: " + lat1 + "\tLongitude: " + lon1);
-                            Console.WriteLine("\nDate: " + date1 + "\tUnix Time: " + locationHistory1.locations[i].timestampMs);
+                            Console.WriteLine("\nDate: " + date1 + "\tUnix Time: " + location1.timestampMs);
                             return true;
                         }
                     }
