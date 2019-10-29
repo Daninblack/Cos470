@@ -1,0 +1,17 @@
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.deps.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.runtimeconfig.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.runtimeconfig.dev.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMet.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMet.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.RazorAssemblyInfo.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.RazorAssemblyInfo.cs
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.RazorTargetAssemblyInfo.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.csproj.CopyComplete
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.pdb
