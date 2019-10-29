@@ -13,21 +13,57 @@ namespace HaveWeMetAPI.Controllers
     public class HaveWeMetController : ControllerBase
     {
         static Dictionary<int, LocationHistory> LocationHistories = new Dictionary<int, LocationHistory>();
-        string json;
 
         public HaveWeMetController()
         {
             var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\LocationHistoryVeryShort.json";
-            json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
+            var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
-            LocationHistories.Add(1, locationHistory);
+            if (LocationHistories.Count == 0)
+            {
+                LocationHistories.Add(0, locationHistory);
+            }
+            else
+            {
+                LocationHistories.Add(LocationHistories.Count, locationHistory);
+            }
         }
 
         // GET api/HaveWeMet
         [HttpGet]
-        public ActionResult<string> Get()
+        public ActionResult<Dictionary<int, LocationHistory>> Get()
         {
-            return json;
+            return LocationHistories;
+        }
+
+        // GET api/HaveWeMet/LocationHistoryIDNumber
+        [HttpGet("{LocationHistoryID}")]
+        public ActionResult<LocationHistory> Get(int LocationHistoryID)
+        {
+            if (LocationHistories.ContainsKey(LocationHistoryID))
+            {
+                return LocationHistories[LocationHistoryID];
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        // GET api/HaveWeMet/LocationHistoryIDNumber/timestamp
+        [HttpGet("{LocationHistoryID}/{timestamp}")]
+        public ActionResult<LocationHistory.Location> Get(int LocationHistoryID, String timeStamp)
+        {
+            if (LocationHistories.ContainsKey(LocationHistoryID))
+            {
+                DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime(timeStamp);
+                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[LocationHistoryID]);
+                return locations;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
