@@ -8,12 +8,12 @@ namespace HaveWeMet
         * Checks where you were on a particular day
         * Returns first instance found
         */
-        public static LocationHistory.Location CheckAlibi(DateTime date, LocationHistory locationHistory)
+        public static LocationHistory.Location CheckAlibi(DateTime date1, LocationHistory locationHistory)
         {
             foreach (var location in locationHistory.locations)
             {
-                var day = LocationHistoryHelperMethods.UnixTimeStampToDateTime(location.timestampMs);
-                if (DateTime.Compare(date, day) == 0)
+                var date2 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(location.timestampMs);
+                if (LocationHistoryHelperMethods.DateTimesCoincide(date1, date2))
                 {
                     Console.WriteLine("Location:\n\nLatitude: " + location.latitudeE7 + "\tLongitude: " + location.longitudeE7);
                     return location;
