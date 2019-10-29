@@ -42,8 +42,6 @@ namespace HaveWeMet
                         //Checks if the coordinates are relatively close
                         if (HaveWeMet)
                         {
-                            Console.WriteLine("We have met!\n\nLatitude: " + lat1 + "\tLongitude: " + lon1);
-                            Console.WriteLine("\nDate: " + date1 + "\tUnix Time: " + location1.timestampMs);
                             return true;
                         }
                     }
