@@ -66,10 +66,5 @@ namespace HaveWeMetAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete/{LocationHistoryID}")]
-        public void DeleteLocationHistory(int LocationHistoryID)
-        {
-            LocationHistories.Remove(LocationHistoryID);
-        }
     }
 }

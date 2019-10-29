@@ -49,8 +49,7 @@ namespace HaveWeMet
          */
         public static DateTime UnixTimeStampToDateTime(string timestampMs)
         {
-            var date = (new DateTime(1970, 1, 1)).AddMilliseconds(double.Parse(timestampMs));
-            //Ignores milliseconds
+            var date = (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds(double.Parse(timestampMs));
             var newDate = date.AddMilliseconds(-date.Millisecond);
             return newDate;
         }
