@@ -50,14 +50,14 @@ namespace HaveWeMetAPI.Controllers
             }
         }
 
-        // GET api/HaveWeMet/LocationHistoryIDNumber/timestamp
-        [HttpGet("{LocationHistoryID}/{timestamp}")]
-        public ActionResult<LocationHistory.Location> Get(int LocationHistoryID, String timeStamp)
+        // GET api/HaveWeMet/LocationHistoryIDNumber/date
+        [HttpGet("{LocationHistoryID}/{date}")]
+        public ActionResult<LocationHistory.Location> Get(int LocationHistoryID, String date)
         {
             if (LocationHistories.ContainsKey(LocationHistoryID))
             {
-                DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime(timeStamp);
-                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[LocationHistoryID]);
+                DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
+                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(newDate, LocationHistories[LocationHistoryID]);
                 return locations;
             }
             else

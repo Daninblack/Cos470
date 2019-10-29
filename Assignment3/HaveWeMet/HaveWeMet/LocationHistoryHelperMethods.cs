@@ -77,6 +77,17 @@ namespace HaveWeMet
         }
 
         /*
+         * Given a string with the following format: "YYYY-MM-DD-HH-mm-sss"
+         * Returns DateTime
+         */
+         public static DateTime StringToDateTime(string date)
+        {
+            DateTime newDate = DateTime.ParseExact(date, "yyyy-MM-dd-HH-mm-ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            return newDate;
+        }
+
+        /*
          * Converts latitudeE7 and longitudeE7 into actual coordinates
          */
         public static double FormatCoordinate(double coordinate)
