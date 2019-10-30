@@ -23,6 +23,10 @@ namespace HaveWeMet
             return null;
         }
 
+        /*
+         * Checks if two location histories share a common time and place
+         * Returns the DateTime for such instance
+         */
         public static DateTime? HaveWeMet(LocationHistory locationHistory1, LocationHistory locationHistory2)
         {
             int i = 0;
