@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HaveWeMet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace HaveWeMetAPI.Controllers
 {
@@ -13,14 +14,17 @@ namespace HaveWeMetAPI.Controllers
     public class HaveWeMetController : ControllerBase
     {
         static Dictionary<int, LocationHistory> LocationHistories = new Dictionary<int, LocationHistory>();
+        IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, true)
+                .Build();
 
         public HaveWeMetController()
         {
-            var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\LocationHistoryVeryShort.json";
+            var filePath = config["filePath"];
             var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
 
-            var filePath2 = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\LocationHistoryVeryShort2.json";
+            var filePath2 = config["filePath2"];
             var json2 = LocationHistoryHelperMethods.BuildJSONFromFile(filePath2);
             var locationHistory2 = LocationHistoryHelperMethods.DeserializeJSON(json2);
 
@@ -40,12 +44,12 @@ namespace HaveWeMetAPI.Controllers
         }
 
         // GET api/HaveWeMet/LocationHistoryID
-        [HttpGet("{LocationHistoryID}")]
-        public ActionResult<LocationHistory> Get(int LocationHistoryID)
+        [HttpGet("{id}")]
+        public ActionResult<LocationHistory> Get(int id)
         {
-            if (LocationHistories.ContainsKey(LocationHistoryID))
+            if (LocationHistories.ContainsKey(id))
             {
-                return LocationHistories[LocationHistoryID];
+                return LocationHistories[id];
             }
             else
             {
@@ -53,23 +57,23 @@ namespace HaveWeMetAPI.Controllers
             }
         }
 
-        // GET api/HaveWeMet/LocationHistoryID/date
-        [HttpGet("{LocationHistoryID}/{date}")]
-        public ActionResult<LocationHistory.Location> Get(int LocationHistoryID, String date)
+        // GET api/HaveWeMet/id/date
+        [HttpGet("{id}/{date}")]
+        public ActionResult<LocationHistory.Location> Get(int id, String date)
         {
-            if (LocationHistories.ContainsKey(LocationHistoryID))
+            if (LocationHistories.ContainsKey(id))
             {
                 DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
-                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(newDate, LocationHistories[LocationHistoryID]);
+                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(newDate, LocationHistories[id]);
                 return locations;
             }
             else
             {
-                return NotFound(); 
+                return new NotFoundResult(); 
             }
         }
 
-        // GET api/HaveWeMet/LocationHistoryID/MetDate/LocationHistoryID2
+        // GET api/HaveWeMet/id/MetDate/id2
         [HttpGet("{id}/MetDate/{id2}")]
         public ActionResult<DateTime> Get(int id, int id2)
         {
@@ -80,7 +84,10 @@ namespace HaveWeMetAPI.Controllers
                 var result = LocationHistoryAnalysis.HaveWeMet(locationHistory, locationHistory2);
                 return result;
             }
-            return null;
+            else
+            {
+                return new NotFoundResult();
+            }
         }
 
         // POST api/HaveWeMet/post

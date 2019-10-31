@@ -15,3 +15,4 @@ C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\D
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\HaveWeMetAPI.pdb
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.dll
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\obj\Debug\netcoreapp2.1\HaveWeMetAPI.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\WebApplication\bin\Debug\netcoreapp2.1\appsettings.json
