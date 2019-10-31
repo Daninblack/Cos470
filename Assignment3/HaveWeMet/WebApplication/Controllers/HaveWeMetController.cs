@@ -91,20 +91,35 @@ namespace HaveWeMetAPI.Controllers
         }
 
         // POST api/HaveWeMet/post
-        //[HttpPost("post")]
-        //public ActionResult<bool> Post([FromBody] string locHistory)
-        //{
-        //    if (LocationHistories.Count() > 0)
-        //    {
-        //        var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(locHistory);
-        //        LocationHistories.Add(LocationHistories.Count, locationHistory);
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        [HttpPost("post")]
+        public ActionResult<bool> Post([FromBody] string locHistory)
+        {
+            if (LocationHistories.Count() > 0)
+            {
+                LocationHistory locationHistory = LocationHistoryHelperMethods.DeserializeJSON(locHistory);
+                LocationHistories.Add(LocationHistories.Count, locationHistory);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // DELETE api/HaveWeMet/delete/id
+        [HttpDelete("delete/{id}")]
+        public ActionResult<bool> Delete(int id)
+        {
+            if (LocationHistories.ContainsKey(id))
+            {
+                LocationHistories.Remove(id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
