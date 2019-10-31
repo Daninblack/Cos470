@@ -13,7 +13,7 @@ namespace HaveWeMetAPI.Controllers
     [ApiController]
     public class HaveWeMetController : ControllerBase
     {
-        static Dictionary<int, LocationHistory> LocationHistories = new Dictionary<int, LocationHistory>();
+        static Dictionary<string, LocationHistory> LocationHistories = new Dictionary<string, LocationHistory>();
         IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", false, true)
                 .Build();
@@ -30,26 +30,26 @@ namespace HaveWeMetAPI.Controllers
 
             if (LocationHistories.Count == 0)
             {
-                LocationHistories.Add(0, locationHistory);
-                LocationHistories.Add(1, locationHistory2);
+                LocationHistories.Add("Donnie", locationHistory);
+                LocationHistories.Add("Frank", locationHistory2);
             }
 
         }
 
         // GET api/HaveWeMet
         [HttpGet]
-        public ActionResult<Dictionary<int, LocationHistory>> Get()
+        public ActionResult<Dictionary<string, LocationHistory>> Get()
         {
             return LocationHistories;
         }
 
-        // GET api/HaveWeMet/LocationHistoryID
-        [HttpGet("{id}")]
-        public ActionResult<LocationHistory> Get(int id)
+        // GET api/HaveWeMet/name
+        [HttpGet("{name}")]
+        public ActionResult<LocationHistory> Get(string name)
         {
-            if (LocationHistories.ContainsKey(id))
+            if (LocationHistories.ContainsKey(name))
             {
-                return LocationHistories[id];
+                return LocationHistories[name];
             }
             else
             {
@@ -58,13 +58,13 @@ namespace HaveWeMetAPI.Controllers
         }
 
         // GET api/HaveWeMet/id/date
-        [HttpGet("{id}/{date}")]
-        public ActionResult<LocationHistory.Location> Get(int id, String date)
+        [HttpGet("{name}/{date}")]
+        public ActionResult<LocationHistory.Location> Get(string name, DateTime date)
         {
-            if (LocationHistories.ContainsKey(id))
+            if (LocationHistories.ContainsKey(name))
             {
-                DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
-                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(newDate, LocationHistories[id]);
+                //DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
+                LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[name]);
                 return locations;
             }
             else
@@ -73,14 +73,14 @@ namespace HaveWeMetAPI.Controllers
             }
         }
 
-        // GET api/HaveWeMet/id/MetDate/id2
-        [HttpGet("{id}/MetDate/{id2}")]
-        public ActionResult<DateTime> Get(int id, int id2)
+        // GET api/HaveWeMet/name/MetDate/name2
+        [HttpGet("{name}/{name2}/FirstMetEachOtherOn")]
+        public ActionResult<DateTime> Get(string name, string name2)
         {
-            if(LocationHistories.ContainsKey(id) && LocationHistories.ContainsKey(id2))
+            if(LocationHistories.ContainsKey(name) && LocationHistories.ContainsKey(name2))
             {
-                LocationHistory locationHistory = LocationHistories[id];
-                LocationHistory locationHistory2 = LocationHistories[id2];
+                LocationHistory locationHistory = LocationHistories[name];
+                LocationHistory locationHistory2 = LocationHistories[name2];
                 var result = LocationHistoryAnalysis.HaveWeMet(locationHistory, locationHistory2);
                 return result;
             }
@@ -91,13 +91,13 @@ namespace HaveWeMetAPI.Controllers
         }
 
         // POST api/HaveWeMet/post
-        [HttpPost("post")]
-        public ActionResult<bool> Post([FromBody] string locHistory)
+        [HttpPost("post/{name}")]
+        public ActionResult<bool> Post(string name, [FromBody] string locHistory)
         {
-            if (LocationHistories.Count() > 0)
+            if (!LocationHistories.ContainsKey(name))
             {
                 LocationHistory locationHistory = LocationHistoryHelperMethods.DeserializeJSON(locHistory);
-                LocationHistories.Add(LocationHistories.Count, locationHistory);
+                LocationHistories.Add(name, locationHistory);
                 return true;
             }
             else
@@ -106,13 +106,13 @@ namespace HaveWeMetAPI.Controllers
             }
         }
 
-        // DELETE api/HaveWeMet/delete/id
-        [HttpDelete("delete/{id}")]
-        public ActionResult<bool> Delete(int id)
+        // DELETE api/HaveWeMet/delete/name
+        [HttpDelete("delete/{name}")]
+        public ActionResult<bool> Delete(string name)
         {
-            if (LocationHistories.ContainsKey(id))
+            if (LocationHistories.ContainsKey(name))
             {
-                LocationHistories.Remove(id);
+                LocationHistories.Remove(name);
                 return true;
             }
             else
