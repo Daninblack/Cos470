@@ -53,7 +53,7 @@ namespace HaveWeMetAPI.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("No location history was found for " + name);
             }
         }
 
@@ -65,11 +65,18 @@ namespace HaveWeMetAPI.Controllers
             {
                 //DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
                 LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[name]);
-                return locations;
+                if(locations == null)
+                {
+                    return NotFound("No location found for this given date: " + date);
+                }
+                else
+                {
+                    return locations;
+                }
             }
             else
             {
-                return new NotFoundResult(); 
+                return NotFound("No location history found for " + name); 
             }
         }
 
@@ -84,9 +91,17 @@ namespace HaveWeMetAPI.Controllers
                 var result = LocationHistoryAnalysis.HaveWeMet(locationHistory, locationHistory2);
                 return result;
             }
+            else if (!LocationHistories.ContainsKey(name) && LocationHistories.ContainsKey(name2))
+            {
+                return NotFound("No location history found for " + name);
+            }
+            else if (LocationHistories.ContainsKey(name) && !LocationHistories.ContainsKey(name2))
+            {
+                return NotFound("No location history found for " + name2);
+            }
             else
             {
-                return new NotFoundResult();
+                return NotFound("No location histories found for both " + name + " and " + name2);
             }
         }
 
