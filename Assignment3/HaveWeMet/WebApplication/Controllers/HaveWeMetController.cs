@@ -59,18 +59,24 @@ namespace HaveWeMetAPI.Controllers
 
         // GET api/HaveWeMet/id/date
         [HttpGet("{name}/{date}")]
-        public ActionResult<LocationHistory.Location> Get(string name, DateTime date)
+        public ActionResult<string> Get(string name, DateTime date)
         {
+            string location = "";
+
             if (LocationHistories.ContainsKey(name))
             {
                 LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[name]);
                 if(locations == null)
                 {
-                    return NotFound("No location found for this given date: " + date);
+                    location = "No location found for this given date: " + date;
+                    return NotFound(location);
                 }
                 else
                 {
-                    return locations;
+                    var dateTime = LocationHistoryHelperMethods.UnixTimeStampToDateTime(locations.timestampMs);
+                    location = name + " was located at:\n\nlatitude: " + locations.latitudeE7 + " longitude: " + locations.longitudeE7 +
+                               "\non " + dateTime;
+                    return location;
                 }
             }
             else
