@@ -114,7 +114,7 @@ namespace Tests
         }
 
         [Test]
-        public void HaveWeMet_WeHaveMet_ReturnsDateTime()
+        public void HaveWeMet_WeHaveMet_ReturnsLocation()
         {
             var filePath1 = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
             var json1 = LocationHistoryHelperMethods.BuildJSONFromFile(filePath1);
@@ -126,7 +126,7 @@ namespace Tests
 
             var result = LocationHistoryAnalysis.HaveWeMet(locationHistory1, locationHistory2);
 
-            Assert.IsInstanceOf(typeof(DateTime), result);
+            Assert.IsInstanceOf(typeof(LocationHistory.Location), result);
         }
 
     }

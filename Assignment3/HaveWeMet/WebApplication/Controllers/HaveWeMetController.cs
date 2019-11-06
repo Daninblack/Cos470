@@ -63,7 +63,6 @@ namespace HaveWeMetAPI.Controllers
         {
             if (LocationHistories.ContainsKey(name))
             {
-                //DateTime newDate = LocationHistoryHelperMethods.StringToDateTime(date);
                 LocationHistory.Location locations = LocationHistoryAnalysis.CheckAlibi(date, LocationHistories[name]);
                 if(locations == null)
                 {
@@ -81,28 +80,37 @@ namespace HaveWeMetAPI.Controllers
         }
 
         // GET api/HaveWeMet/name/MetDate/name2
-        [HttpGet("{name}/{name2}/FirstMetEachOtherOn")]
-        public ActionResult<DateTime> Get(string name, string name2)
+        [HttpGet("{name}/{name2}/MetEachOther")]
+        public ActionResult<string> Get(string name, string name2)
         {
-            if(LocationHistories.ContainsKey(name) && LocationHistories.ContainsKey(name2))
+            string HaveWeMetInfo = "";
+            if (LocationHistories.ContainsKey(name) && LocationHistories.ContainsKey(name2))
             {
                 LocationHistory locationHistory = LocationHistories[name];
                 LocationHistory locationHistory2 = LocationHistories[name2];
                 var result = LocationHistoryAnalysis.HaveWeMet(locationHistory, locationHistory2);
-                return result;
+                var date = LocationHistoryHelperMethods.UnixTimeStampToDateTime(result.timestampMs);
+                HaveWeMetInfo = name + " and " + name2 + " first met each other on:\n\n" +
+                                "Time: " + date + "\nlatitude: " + result.latitudeE7 + " longitude: " + result.longitudeE7;
             }
             else if (!LocationHistories.ContainsKey(name) && LocationHistories.ContainsKey(name2))
             {
-                return NotFound("No location history found for " + name);
+                HaveWeMetInfo = "No location history found for " + name;
+                return NotFound(HaveWeMetInfo);
             }
             else if (LocationHistories.ContainsKey(name) && !LocationHistories.ContainsKey(name2))
-            {
-                return NotFound("No location history found for " + name2);
+            { 
+
+                HaveWeMetInfo = "No location history found for " + name2;
+                return NotFound(HaveWeMetInfo);
             }
             else
             {
-                return NotFound("No location histories found for both " + name + " and " + name2);
+                HaveWeMetInfo = "No location histories found for both " + name + " and " + name2;
+                return NotFound(HaveWeMetInfo);
             }
+
+            return HaveWeMetInfo;
         }
 
         // POST api/HaveWeMet/post

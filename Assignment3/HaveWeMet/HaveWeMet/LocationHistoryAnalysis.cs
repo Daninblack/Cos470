@@ -27,7 +27,7 @@ namespace HaveWeMet
          * Checks if two location histories share a common time and place
          * Returns the DateTime for such instance
          */
-        public static DateTime? HaveWeMet(LocationHistory locationHistory1, LocationHistory locationHistory2)
+        public static LocationHistory.Location HaveWeMet(LocationHistory locationHistory1, LocationHistory locationHistory2)
         {
             int i = 0;
             int j = 0;
@@ -55,7 +55,8 @@ namespace HaveWeMet
                     //Checks if the coordinates are relatively close
                     if (HaveWeMet)
                     {
-                        return date1;
+                        //return date1;
+                        return locationHistory1.locations[i];
                     }
                     i++;
                     j++;

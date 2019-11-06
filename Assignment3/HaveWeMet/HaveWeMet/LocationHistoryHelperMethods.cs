@@ -62,7 +62,7 @@ namespace HaveWeMet
         public static bool DateTimesCoincide(DateTime date1, DateTime date2)
         {
 
-            double timeSpanLimit = 20.0;
+            double timeSpanLimit = 30.0;
             TimeSpan timeSpan = date1 - date2;
             double duration = Math.Abs(timeSpan.TotalMinutes);
 
