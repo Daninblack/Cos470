@@ -14,7 +14,7 @@ namespace Tests
         [Test]
         public void TestDeserializeJSON_ReturnsLocationHistory()
         {
-            var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
+            var filePath = @"LocationHistorySample.txt";
             var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
             Assert.IsInstanceOf(typeof(LocationHistory), locationHistory);
@@ -93,7 +93,7 @@ namespace Tests
         public void CheckAlibi_GivenExistingDate_ReturnsLocation()
         {
             DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime("1548894177190");
-            var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
+            var filePath = @"LocationHistorySample.txt";
             var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
 
@@ -105,7 +105,7 @@ namespace Tests
         public void CheckAlibi_GivenNonExistingDate_ReturnsNull()
         {
             DateTime date = LocationHistoryHelperMethods.UnixTimeStampToDateTime("1001000100100");
-            var filePath = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
+            var filePath = @"LocationHistorySample.txt";
             var json = LocationHistoryHelperMethods.BuildJSONFromFile(filePath);
             var locationHistory = LocationHistoryHelperMethods.DeserializeJSON(json);
 
@@ -116,11 +116,11 @@ namespace Tests
         [Test]
         public void HaveWeMet_WeHaveMet_ReturnsLocation()
         {
-            var filePath1 = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample.txt";
+            var filePath1 = @"LocationHistorySample.txt";
             var json1 = LocationHistoryHelperMethods.BuildJSONFromFile(filePath1);
             var locationHistory1 = LocationHistoryHelperMethods.DeserializeJSON(json1);
 
-            var filePath2 = @"C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\LocationHistorySample2.txt";
+            var filePath2 = @"LocationHistorySample2.txt";
             var json2 = LocationHistoryHelperMethods.BuildJSONFromFile(filePath2);
             var locationHistory2 = LocationHistoryHelperMethods.DeserializeJSON(json2);
 

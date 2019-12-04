@@ -16,3 +16,5 @@ C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\obj\Debug\netc
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\obj\Debug\netcoreapp2.1\Tests.csproj.CopyComplete
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\obj\Debug\netcoreapp2.1\Tests.dll
 C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\obj\Debug\netcoreapp2.1\Tests.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\bin\Debug\netcoreapp2.1\LocationHistorySample.txt
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\Tests\bin\Debug\netcoreapp2.1\LocationHistorySample2.txt

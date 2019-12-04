@@ -16,4 +16,13 @@
     <ProjectReference Include="..\HaveWeMet\HaveWeMet.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="LocationHistorySample.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LocationHistorySample2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
