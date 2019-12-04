@@ -16,7 +16,6 @@ namespace HaveWeMet
                 var date2 = LocationHistoryHelperMethods.UnixTimeStampToDateTime(location.timestampMs);
                 if (LocationHistoryHelperMethods.DateTimesCoincide(date1, date2))
                 {
-                    Console.WriteLine("Location:\n\nLatitude: " + location.latitudeE7 + "\tLongitude: " + location.longitudeE7);
                     return location;
                 }
             }

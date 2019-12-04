@@ -38,7 +38,6 @@ namespace HaveWeMet
             }
             catch (Exception e)
             {
-                Console.WriteLine("We had a problem: " + e.Message.ToString());
                 return null;
             }
         }
