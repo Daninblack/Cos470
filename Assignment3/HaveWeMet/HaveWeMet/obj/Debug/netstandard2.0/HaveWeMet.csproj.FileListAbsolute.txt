@@ -1,0 +1,9 @@
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\bin\Debug\netstandard2.0\HaveWeMet.deps.json
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\bin\Debug\netstandard2.0\HaveWeMet.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\bin\Debug\netstandard2.0\HaveWeMet.pdb
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.dll
+C:\Users\Daniel\Desktop\Cos470 folder\Assignment3\HaveWeMet\HaveWeMet\obj\Debug\netstandard2.0\HaveWeMet.pdb
